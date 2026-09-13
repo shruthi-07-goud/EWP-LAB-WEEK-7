@@ -2,7 +2,6 @@ async function loadCafeNote() {
     const quoteElement = document.getElementById('quote-text');
     
     try {
-        // Asynchronously load text data using Fetch API
         const response = await fetch('specials.txt');
         
         if (!response.ok) {
@@ -11,14 +10,14 @@ async function loadCafeNote() {
 
         const text = await response.text();
         
-        // Split text by lines and pick a random note
+        // Split text lines and join them with line breaks
         const notes = text.split('\n').filter(line => line.trim() !== '');
-        const randomIndex = Math.floor(Math.random() * notes.length);
+        quoteElement.innerHTML = notes.join('<br><br>');
         
-        // Update DOM
-        quoteElement.innerText = notes[randomIndex];
     } catch (error) {
-        quoteElement.innerText = "Couldn't load cafe note today!";
+        quoteElement.innerText = "Couldn't load cafe notes!";
         console.error('Fetch error:', error);
     }
 }
+        
+     
